@@ -11,34 +11,42 @@ public class Menu {
     }
 
     public void showMainMenu() {
-        System.out.println();
-        System.out.println("=== Сортировка автомобилей ===");
-        System.out.println("1. Создать и отсортировать коллекцию");
-        System.out.println("0. Выход");
+        System.out.println("""
+            
+            === Сортировка автомобилей ===
+            1. Создать и отсортировать коллекцию
+            0. Выход
+            """);
     }
 
     public void showInputMethodMenu() {
-        System.out.println();
-        System.out.println("=== Способ заполнения коллекции ===");
-        System.out.println("1. Вручную");
-        System.out.println("2. Случайными значениями");
-        System.out.println("3. Из файла");
+        System.out.println("""
+            
+            === Способ заполнения коллекции ===
+            1. Вручную
+            2. Случайными значениями
+            3. Из файла
+            """);
     }
 
     public void showSortingAlgorithmMenu() {
-        System.out.println();
-        System.out.println("=== Алгоритм сортировки ===");
-        System.out.println("1. Bubble Sort");
-        System.out.println("2. Selection Sort");
+        System.out.println("""
+            
+            === Алгоритм сортировки ===
+            1. Bubble Sort
+            2. Selection Sort
+            """);
     }
 
     public void showSortingFieldMenu() {
-        System.out.println();
-        System.out.println("=== Поле сортировки ===");
-        System.out.println("1. Мощность");
-        System.out.println("2. Модель");
-        System.out.println("3. Год производства");
-        System.out.println("4. Все поля");
+        System.out.println("""
+            
+            === Поле сортировки ===
+            1. Мощность
+            2. Модель
+            3. Год производства
+            4. Все поля
+            """);
     }
 
     public int readMenuChoice(int min, int max) {
