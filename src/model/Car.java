@@ -18,17 +18,29 @@ public class Car {
         private int power;
         private String model;
 
-        public Builder setYear(int year) { this.year = year; return this; }
-        public Builder setPower(int power) { this.power = power; return this; }
-        public Builder setModel(String model) { this.model = model; return this; }
+        public Builder setYear(int year) {
+            this.year = year; return this;
+        }
+        public Builder setPower(int power) {
+            this.power = power; return this;
+        }
+        public Builder setModel(String model) {
+            this.model = model; return this;
+        }
         public Car build() {
             return new Car(this);
         }
     }
 
-    public int getPower() { return power; }
-    public String getModel() { return model; }
-    public int getYear() { return year; }
+    public int getPower() {
+        return power;
+    }
+    public String getModel() {
+        return model;
+    }
+    public int getYear() {
+        return year;
+    }
 
     @Override
     public boolean equals(Object o) {
