@@ -19,13 +19,16 @@ public class Car {
         private String model;
 
         public Builder setYear(int year) {
-            this.year = year; return this;
+            this.year = year;
+            return this;
         }
         public Builder setPower(int power) {
-            this.power = power; return this;
+            this.power = power;
+            return this;
         }
         public Builder setModel(String model) {
-            this.model = model; return this;
+            this.model = model;
+            return this;
         }
         public Car build() {
             return new Car(this);
