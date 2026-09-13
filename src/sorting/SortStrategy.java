@@ -1,7 +1,7 @@
 package sorting;
 
-import model.Car;
+import java.util.Comparator;
 
-public interface SortStrategy {
-    void sort(Car[] cars, SortField field);
+public interface SortStrategy<T> {
+    void sort(T[] items, Comparator<T> comparator);
 }

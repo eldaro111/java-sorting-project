@@ -1,20 +1,20 @@
 package sorting;
 
-import model.Car;
+import java.util.Comparator;
 
-public class Sorter {
+public class Sorter<T> {
 
-    private SortStrategy strategy;
+    private SortStrategy<T> strategy;
 
-    public Sorter(SortStrategy strategy) {
+    public Sorter(SortStrategy<T> strategy) {
         this.strategy = strategy;
     }
 
-    public void setStrategy(SortStrategy strategy) {
+    public void setStrategy(SortStrategy<T> strategy) {
         this.strategy = strategy;
     }
 
-    public void sort(Car[] cars, SortField field) {
-        strategy.sort(cars, field);
+    public void sort(T[] items, Comparator<T> comparator) {
+        strategy.sort(items, comparator);
     }
 }
