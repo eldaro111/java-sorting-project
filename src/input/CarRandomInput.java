@@ -1,12 +1,14 @@
-package inputting;
+package input;
 
 import model.Car;
 import validation.CarValidator;
 
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class CarRandom {
+public class CarRandomInput {
 
     private final Random random = new Random();
 
@@ -15,14 +17,14 @@ public class CarRandom {
             "Ford", "Hyundai", "Kia", "Nissan", "Volkswagen"
     };
 
-    public Car[] readCars(int length) {
+    public List<Car> readCars(int length) {
         if (length <= 0) {
-            return new Car[0];
+            return new ArrayList<>();
         }
 
-        Car[] cars = new Car[length];
+        List<Car> cars = new ArrayList<>(length);
         for (int i = 0; i < length; i++) {
-            cars[i] = generateRandomCar();
+            cars.add(generateRandomCar());
         }
 
         return cars;
@@ -38,9 +40,10 @@ public class CarRandom {
         int power = 50 + random.nextInt(951);
 
         if (!CarValidator.isValid(model, year, power)) {
-            model = "Toyota";
-            year = 2020;
-            power = 150;
+            throw new IllegalStateException(
+                    String.format("Сгенерированы некорректные данные автомобиля: %s, %d г., %d л.с.",
+                            model, year, power)
+            );
         }
 
         return new Car.Builder()
@@ -50,3 +53,4 @@ public class CarRandom {
                 .build();
     }
 }
+
