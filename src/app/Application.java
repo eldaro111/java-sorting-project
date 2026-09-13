@@ -17,7 +17,7 @@ public class Application {
             int command = menu.readMenuChoice(0, 1);
 
             switch (command) {
-                case 1 -> showDevelopmentMessage();
+                case 1 -> configureSorting();
                 case 0 -> running = false;
             }
         }
@@ -25,9 +25,34 @@ public class Application {
         menu.showExitMessage();
     }
 
-    private void showDevelopmentMessage() {
-        System.out.println(
-                "Функционал создания и сортировки коллекции находится в разработке."
+    private void configureSorting() {
+        int collectionSize = menu.readCollectionSize();
+        int inputMethod = chooseInputMethod();
+        int sortingAlgorithm = chooseSortingAlgorithm();
+        int sortingField = chooseSortingField();
+
+        menu.showConfiguration(
+                collectionSize,
+                inputMethod,
+                sortingAlgorithm,
+                sortingField
         );
+
+        menu.showIntegrationPendingMessage();
+    }
+
+    private int chooseInputMethod() {
+        menu.showInputMethodMenu();
+        return menu.readMenuChoice(1, 3);
+    }
+
+    private int chooseSortingAlgorithm() {
+        menu.showSortingAlgorithmMenu();
+        return menu.readMenuChoice(1, 2);
+    }
+
+    private int chooseSortingField() {
+        menu.showSortingFieldMenu();
+        return menu.readMenuChoice(1, 4);
     }
 }
