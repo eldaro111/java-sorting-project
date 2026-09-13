@@ -19,10 +19,10 @@ public class CarFileInput {
         Honda;2019;140
     */
 
-    public Car[] readCars(String fileName, int expectedLength)
+    public List<Car> readCars(String fileName, int expectedLength)
             throws IOException {
 
-        List<Car> cars = new ArrayList<>();
+        List<Car> cars = new ArrayList<>(expectedLength);
 
         try (BufferedReader reader =
                      new BufferedReader(new FileReader(fileName))) {
@@ -59,7 +59,7 @@ public class CarFileInput {
             );
         }
 
-        return cars.toArray(new Car[0]);
+        return cars;
     }
 
     private Car parseCar(String line) {
