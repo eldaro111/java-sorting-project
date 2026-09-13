@@ -22,6 +22,10 @@ public class CarFileInput {
     public List<Car> readCars(String fileName, int expectedLength)
             throws IOException {
 
+        if (expectedLength <= 0) {
+            throw new IllegalArgumentException("Ожидаемый размер коллекции должен быть больше нуля.");
+        }
+
         List<Car> cars = new ArrayList<>(expectedLength);
 
         try (BufferedReader reader =
@@ -63,7 +67,7 @@ public class CarFileInput {
     }
 
     private Car parseCar(String line) {
-        String[] parts = line.split(";");
+        String[] parts = line.split(";", -1);
 
         if (parts.length != 3) {
             return null;
