@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class SelectionSortStrategy<T> implements SortStrategy<T> {
 
     @Override
-    public void sort(T[] items, Comparator<T> comparator) {
+    public void sort(List<T> items, Comparator<T> comparator) {
         for (int i = 0; i < items.length - 1; i++) {
             int minIndex = i;
 
