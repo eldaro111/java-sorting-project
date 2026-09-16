@@ -4,6 +4,7 @@ import input.CarFileInput;
 import input.CarManualInput;
 import input.CarRandomInput;
 import model.Car;
+import output.ResultFileWriter;
 import sorting.BubbleSortStrategy;
 import sorting.CarComparators;
 import sorting.SelectionSortStrategy;
@@ -20,6 +21,7 @@ public class Application {
     private final CarManualInput manualInput;
     private final CarRandomInput randomInput;
     private final CarFileInput fileInput;
+    private final ResultFileWriter resultFileWriter;
 
     public Application() {
         Scanner scanner = new Scanner(System.in);
@@ -28,6 +30,7 @@ public class Application {
         manualInput = new CarManualInput(scanner);
         randomInput = new CarRandomInput();
         fileInput = new CarFileInput();
+        resultFileWriter = new ResultFileWriter();
     }
 
     public void run() {
@@ -84,6 +87,8 @@ public class Application {
                 "=== Коллекция после сортировки ===",
                 cars
         );
+
+        saveResultIfRequested(cars);
     }
 
     private List<Car> loadCars(
@@ -125,6 +130,41 @@ public class Application {
             );
 
             return null;
+        }
+    }
+
+    private void saveResultIfRequested(
+            List<Car> cars
+    ) {
+        menu.showSaveResultMenu();
+
+        int saveChoice = menu.readMenuChoice(
+                0,
+                1
+        );
+
+        if (saveChoice == 0) {
+            return;
+        }
+
+        String fileName =
+                menu.readOutputFileName();
+
+        try {
+            resultFileWriter.appendCars(
+                    fileName,
+                    cars
+            );
+
+            menu.showSaveSuccess(
+                    fileName
+            );
+
+        } catch (IOException e) {
+            menu.showError(
+                    "Не удалось сохранить результат: "
+                            + e.getMessage()
+            );
         }
     }
 
