@@ -12,8 +12,11 @@ public final class CarComparators {
         return Comparator.comparingInt(Car::getPower);
     }
 
-    public static Comparator<Car> byModel(){ 
-        return Comparator.comparing(Car::getModel, Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER));
+    public static Comparator<Car> byModel() {
+        return Comparator.comparing(
+                Car::getModel,
+                String.CASE_INSENSITIVE_ORDER
+        );
     }
 
     public static Comparator<Car> byYear() {
@@ -25,10 +28,4 @@ public final class CarComparators {
                 .thenComparing(byModel())
                 .thenComparing(byYear());
     }
-
-    public static Comparator<Car> byThreeFields(){
-        return Comparator
-            .comparing(Car::getModel, Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER))
-            .thenComparingInt(Car::getPower)
-            .thenComparingInt(Car::getYear);
 }
