@@ -52,6 +52,15 @@ public class Menu {
                 """);
     }
 
+    public void showSaveResultMenu() {
+        System.out.println("""
+                
+                === Сохранение результата ===
+                1. Сохранить результат в файл
+                0. Не сохранять
+                """);
+    }
+
     public int readMenuChoice(int min, int max) {
         while (true) {
             System.out.print("Выберите действие: ");
@@ -134,6 +143,26 @@ public class Menu {
         }
     }
 
+    public String readOutputFileName() {
+        while (true) {
+            System.out.print(
+                    "Введите путь к файлу для сохранения результата: "
+            );
+
+            String fileName = scanner.nextLine().trim();
+
+            if (fileName.isEmpty()) {
+                System.out.println(
+                        "Ошибка: путь к файлу не может быть пустым."
+                );
+
+                continue;
+            }
+
+            return fileName;
+        }
+    }
+
     public void showConfiguration(
             int collectionSize,
             int inputMethod,
@@ -176,6 +205,15 @@ public class Menu {
         for (Car car : cars) {
             System.out.println(car);
         }
+    }
+
+    public void showSaveSuccess(
+            String fileName
+    ) {
+        System.out.println(
+                "Результат сохранён в файл: "
+                        + fileName
+        );
     }
 
     public void showError(String message) {
