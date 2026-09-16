@@ -60,6 +60,7 @@ public class Menu {
                 System.out.println(
                         "Ошибка: необходимо ввести целое число."
                 );
+
                 scanner.nextLine();
                 continue;
             }
@@ -75,6 +76,7 @@ public class Menu {
                                 + max
                                 + "."
                 );
+
                 continue;
             }
 
@@ -84,12 +86,15 @@ public class Menu {
 
     public int readCollectionSize() {
         while (true) {
-            System.out.print("Введите размер коллекции: ");
+            System.out.print(
+                    "Введите размер коллекции: "
+            );
 
             if (!scanner.hasNextInt()) {
                 System.out.println(
                         "Ошибка: необходимо ввести целое число."
                 );
+
                 scanner.nextLine();
                 continue;
             }
@@ -101,6 +106,7 @@ public class Menu {
                 System.out.println(
                         "Ошибка: размер коллекции должен быть больше нуля."
                 );
+
                 continue;
             }
 
@@ -110,7 +116,9 @@ public class Menu {
 
     public String readFileName() {
         while (true) {
-            System.out.print("Введите путь к файлу: ");
+            System.out.print(
+                    "Введите путь к файлу: "
+            );
 
             String fileName = scanner.nextLine().trim();
 
@@ -118,6 +126,7 @@ public class Menu {
                 System.out.println(
                         "Ошибка: путь к файлу не может быть пустым."
                 );
+
                 continue;
             }
 
@@ -132,25 +141,35 @@ public class Menu {
             int sortingField
     ) {
         System.out.println();
-        System.out.println("=== Выбранные параметры ===");
         System.out.println(
-                "Размер коллекции: " + collectionSize
+                "=== Выбранные параметры ==="
         );
+
+        System.out.println(
+                "Размер коллекции: "
+                        + collectionSize
+        );
+
         System.out.println(
                 "Способ заполнения: "
                         + getInputMethodName(inputMethod)
         );
+
         System.out.println(
                 "Алгоритм сортировки: "
                         + getSortingAlgorithmName(sortingAlgorithm)
         );
+
         System.out.println(
                 "Поле сортировки: "
                         + getSortingFieldName(sortingField)
         );
     }
 
-    public void showCars(String title, List<Car> cars) {
+    public void showCars(
+            String title,
+            List<Car> cars
+    ) {
         System.out.println();
         System.out.println(title);
 
@@ -165,21 +184,15 @@ public class Menu {
         );
     }
 
-    public void showSortingPendingMessage() {
-        System.out.println();
-        System.out.println(
-                "Коллекция получена. "
-                        + "Сортировка будет подключена после merge sorting-модуля."
-        );
-    }
-
     public void showExitMessage() {
         System.out.println(
                 "Программа завершена."
         );
     }
 
-    private String getInputMethodName(int choice) {
+    private String getInputMethodName(
+            int choice
+    ) {
         return switch (choice) {
             case 1 -> "Вручную";
             case 2 -> "Случайные значения";
@@ -188,7 +201,9 @@ public class Menu {
         };
     }
 
-    private String getSortingAlgorithmName(int choice) {
+    private String getSortingAlgorithmName(
+            int choice
+    ) {
         return switch (choice) {
             case 1 -> "Bubble Sort";
             case 2 -> "Selection Sort";
@@ -196,7 +211,9 @@ public class Menu {
         };
     }
 
-    private String getSortingFieldName(int choice) {
+    private String getSortingFieldName(
+            int choice
+    ) {
         return switch (choice) {
             case 1 -> "Мощность";
             case 2 -> "Модель";

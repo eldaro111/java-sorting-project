@@ -4,8 +4,13 @@ import input.CarFileInput;
 import input.CarManualInput;
 import input.CarRandomInput;
 import model.Car;
+import sorting.BubbleSortStrategy;
+import sorting.CarComparators;
+import sorting.SelectionSortStrategy;
+import sorting.Sorter;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,11 +49,8 @@ public class Application {
 
     private void configureSorting() {
         int collectionSize = menu.readCollectionSize();
-
         int inputMethod = chooseInputMethod();
-
         int sortingAlgorithm = chooseSortingAlgorithm();
-
         int sortingField = chooseSortingField();
 
         menu.showConfiguration(
@@ -68,11 +70,20 @@ public class Application {
         }
 
         menu.showCars(
-                "=== Полученная коллекция ===",
+                "=== Коллекция до сортировки ===",
                 cars
         );
 
-        menu.showSortingPendingMessage();
+        sortCars(
+                cars,
+                sortingAlgorithm,
+                sortingField
+        );
+
+        menu.showCars(
+                "=== Коллекция после сортировки ===",
+                cars
+        );
     }
 
     private List<Car> loadCars(
@@ -115,6 +126,58 @@ public class Application {
 
             return null;
         }
+    }
+
+    private void sortCars(
+            List<Car> cars,
+            int sortingAlgorithm,
+            int sortingField
+    ) {
+        Sorter<Car> sorter = createSorter(
+                sortingAlgorithm
+        );
+
+        Comparator<Car> comparator = createComparator(
+                sortingField
+        );
+
+        sorter.sort(
+                cars,
+                comparator
+        );
+    }
+
+    private Sorter<Car> createSorter(
+            int sortingAlgorithm
+    ) {
+        return switch (sortingAlgorithm) {
+            case 1 -> new Sorter<>(
+                    new BubbleSortStrategy<>()
+            );
+
+            case 2 -> new Sorter<>(
+                    new SelectionSortStrategy<>()
+            );
+
+            default -> throw new IllegalArgumentException(
+                    "Неизвестный алгоритм сортировки."
+            );
+        };
+    }
+
+    private Comparator<Car> createComparator(
+            int sortingField
+    ) {
+        return switch (sortingField) {
+            case 1 -> CarComparators.byPower();
+            case 2 -> CarComparators.byModel();
+            case 3 -> CarComparators.byYear();
+            case 4 -> CarComparators.byAllFields();
+
+            default -> throw new IllegalArgumentException(
+                    "Неизвестное поле сортировки."
+            );
+        };
     }
 
     private int chooseInputMethod() {
