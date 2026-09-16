@@ -14,7 +14,7 @@ public class Sorter<T> {
         this.strategy = strategy;
     }
 
-    public void sort(T[] items, Comparator<T> comparator) {
+    public void sort(List<T> items, Comparator<T> comparator) {
         strategy.sort(items, comparator);
     }
 }
