@@ -1,52 +1,55 @@
 package app;
 
+import model.Car;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
 
     private final Scanner scanner;
 
-    public Menu() {
-        scanner = new Scanner(System.in);
+    public Menu(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     public void showMainMenu() {
         System.out.println("""
-            
-            === Сортировка автомобилей ===
-            1. Создать и отсортировать коллекцию
-            0. Выход
-            """);
+                
+                === Сортировка автомобилей ===
+                1. Создать и отсортировать коллекцию
+                0. Выход
+                """);
     }
 
     public void showInputMethodMenu() {
         System.out.println("""
-            
-            === Способ заполнения коллекции ===
-            1. Вручную
-            2. Случайными значениями
-            3. Из файла
-            """);
+                
+                === Способ заполнения коллекции ===
+                1. Вручную
+                2. Случайными значениями
+                3. Из файла
+                """);
     }
 
     public void showSortingAlgorithmMenu() {
         System.out.println("""
-            
-            === Алгоритм сортировки ===
-            1. Bubble Sort
-            2. Selection Sort
-            """);
+                
+                === Алгоритм сортировки ===
+                1. Bubble Sort
+                2. Selection Sort
+                """);
     }
 
     public void showSortingFieldMenu() {
         System.out.println("""
-            
-            === Поле сортировки ===
-            1. Мощность
-            2. Модель
-            3. Год производства
-            4. Все поля
-            """);
+                
+                === Поле сортировки ===
+                1. Мощность
+                2. Модель
+                3. Год производства
+                4. Все поля
+                """);
     }
 
     public int readMenuChoice(int min, int max) {
@@ -54,7 +57,9 @@ public class Menu {
             System.out.print("Выберите действие: ");
 
             if (!scanner.hasNextInt()) {
-                System.out.println("Ошибка: необходимо ввести целое число.");
+                System.out.println(
+                        "Ошибка: необходимо ввести целое число."
+                );
                 scanner.nextLine();
                 continue;
             }
@@ -82,7 +87,9 @@ public class Menu {
             System.out.print("Введите размер коллекции: ");
 
             if (!scanner.hasNextInt()) {
-                System.out.println("Ошибка: необходимо ввести целое число.");
+                System.out.println(
+                        "Ошибка: необходимо ввести целое число."
+                );
                 scanner.nextLine();
                 continue;
             }
@@ -91,11 +98,30 @@ public class Menu {
             scanner.nextLine();
 
             if (size <= 0) {
-                System.out.println("Ошибка: размер коллекции должен быть больше нуля.");
+                System.out.println(
+                        "Ошибка: размер коллекции должен быть больше нуля."
+                );
                 continue;
             }
 
             return size;
+        }
+    }
+
+    public String readFileName() {
+        while (true) {
+            System.out.print("Введите путь к файлу: ");
+
+            String fileName = scanner.nextLine().trim();
+
+            if (fileName.isEmpty()) {
+                System.out.println(
+                        "Ошибка: путь к файлу не может быть пустым."
+                );
+                continue;
+            }
+
+            return fileName;
         }
     }
 
@@ -107,22 +133,50 @@ public class Menu {
     ) {
         System.out.println();
         System.out.println("=== Выбранные параметры ===");
-        System.out.println("Размер коллекции: " + collectionSize);
-        System.out.println("Способ заполнения: " + getInputMethodName(inputMethod));
-        System.out.println("Алгоритм сортировки: "
-                + getSortingAlgorithmName(sortingAlgorithm));
-        System.out.println("Поле сортировки: " + getSortingFieldName(sortingField));
+        System.out.println(
+                "Размер коллекции: " + collectionSize
+        );
+        System.out.println(
+                "Способ заполнения: "
+                        + getInputMethodName(inputMethod)
+        );
+        System.out.println(
+                "Алгоритм сортировки: "
+                        + getSortingAlgorithmName(sortingAlgorithm)
+        );
+        System.out.println(
+                "Поле сортировки: "
+                        + getSortingFieldName(sortingField)
+        );
     }
 
-    public void showIntegrationPendingMessage() {
+    public void showCars(String title, List<Car> cars) {
+        System.out.println();
+        System.out.println(title);
+
+        for (Car car : cars) {
+            System.out.println(car);
+        }
+    }
+
+    public void showError(String message) {
+        System.out.println(
+                "Ошибка: " + message
+        );
+    }
+
+    public void showSortingPendingMessage() {
         System.out.println();
         System.out.println(
-                "Параметры приняты. Загрузка и сортировка будут подключены на этапе интеграции."
+                "Коллекция получена. "
+                        + "Сортировка будет подключена после merge sorting-модуля."
         );
     }
 
     public void showExitMessage() {
-        System.out.println("Программа завершена.");
+        System.out.println(
+                "Программа завершена."
+        );
     }
 
     private String getInputMethodName(int choice) {
